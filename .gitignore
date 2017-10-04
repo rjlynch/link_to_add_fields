@@ -1,3 +1,5 @@
 .../
 test/dummy/tmp/
 test/dummy/log
+spec/dummy/tmp
+spec/dummy/log
