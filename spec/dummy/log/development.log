@@ -1,0 +1,943 @@
+Started GET "/" for 127.0.0.1 at 2017-10-03 18:47:21 +0100
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/richardlynch/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/railties-5.1.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/richardlynch/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/railties-5.1.3/lib/rails/templates/rails/welcome/index.html.erb (3.6ms)
+Completed 200 OK in 300ms (Views: 28.4ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (1.7ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (1.5ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreatePosts (20171003174738)
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "posts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20171003174738"]]
+  [1m[35m (1.2ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateComments (20171003174805)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "post_id" integer, "body" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, CONSTRAINT "fk_rails_2fd19c0db7"
+FOREIGN KEY ("post_id")
+  REFERENCES "posts" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE  INDEX "index_comments_on_post_id" ON "comments" ("post_id")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20171003174805"]]
+  [1m[35m (1.2ms)[0m  [1m[36mcommit transaction[0m
+Migrating to AddNameToPosts (20171003174822)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "posts" ADD "name" varchar[0m
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddNameToPosts (20171003174822)
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddBodyToPosts (20171003174822)
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "posts" ADD "body" varchar[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20171003174822"]]
+  [1m[35m (1.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2017-10-03 17:49:49.165737"], ["updated_at", "2017-10-03 17:49:49.165737"]]
+  [1m[35m (1.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comments_on_post_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comments_on_post_id' AND type='index'
+[0m
+Started GET "/" for 127.0.0.1 at 2017-10-03 18:54:08 +0100
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/new.html.erb within layouts/application (24.1ms)
+Completed 500 Internal Server Error in 57ms (ActiveRecord: 0.5ms)
+
+
+  
+ActionView::Template::Error (undefined method `posts_path' for #<#<Class:0x007f84f92244c8>:0x007f84f8c72098>):
+    1: <%= form_for @post do |f| %>
+    2:   <%= f.label :name %>
+    3:   <%= f.text_field :name %>
+    4:   <%= f.label :body %>
+  
+app/views/posts/new.html.erb:1:in `_app_views_posts_new_html_erb__1255866695803682741_70104546095220'
+Started GET "/" for 127.0.0.1 at 2017-10-03 18:54:24 +0100
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/new.html.erb within layouts/application (79.1ms)
+Completed 200 OK in 355ms (Views: 340.9ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-03 18:56:36 +0100
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (1.0ms)
+  Rendered posts/new.html.erb within layouts/application (12.1ms)
+Completed 200 OK in 22ms (Views: 19.9ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-03 18:59:09 +0100
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (11.7ms)
+  Rendered posts/new.html.erb within layouts/application (14.8ms)
+Completed 500 Internal Server Error in 22ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionView::Template::Error (wrong number of arguments (given 2, expected 3)):
+    2:   <%= f.label :body %>
+    3:   <%= f.text_area :body %>
+    4:   <%= f.hidden_field :_destroy %>
+    5:   <%= link_to_remove_fields 'Remove comment', target: '.comment_fields' %>
+    6: </div>
+  
+app/views/posts/_comment_fields.html.erb:5:in `_app_views_posts__comment_fields_html_erb__3328438088693075365_70104572570380'
+app/views/posts/new.html.erb:9:in `block in _app_views_posts_new_html_erb__1255866695803682741_70104547029380'
+app/views/posts/new.html.erb:1:in `_app_views_posts_new_html_erb__1255866695803682741_70104547029380'
+Started GET "/" for 127.0.0.1 at 2017-10-03 18:59:31 +0100
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (2.2ms)
+  Rendered posts/new.html.erb within layouts/application (13.6ms)
+Completed 500 Internal Server Error in 89ms (ActiveRecord: 1.1ms)
+
+
+  
+LoadError (cannot load such file -- coffee_script):
+  
+app/views/layouts/application.html.erb:8:in `_app_views_layouts_application_html_erb___2632046400245614020_70104597104980'
+Started GET "/" for 127.0.0.1 at 2017-10-03 19:00:55 +0100
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (1.4ms)
+  Rendered posts/new.html.erb within layouts/application (5.9ms)
+Completed 500 Internal Server Error in 17ms (ActiveRecord: 0.0ms)
+
+
+  
+LoadError (cannot load such file -- coffee_script):
+  
+app/views/layouts/application.html.erb:8:in `_app_views_layouts_application_html_erb___2632046400245614020_70104554569480'
+Started GET "/" for 127.0.0.1 at 2017-10-03 19:01:21 +0100
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (1.4ms)
+  Rendered posts/new.html.erb within layouts/application (6.7ms)
+Completed 200 OK in 35ms (Views: 33.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-03 19:04:29 +0100
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (2.1ms)
+  Rendered posts/new.html.erb within layouts/application (51.6ms)
+Completed 200 OK in 238ms (Views: 225.1ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-03 19:05:45 +0100
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (2.4ms)
+  Rendered posts/new.html.erb within layouts/application (48.2ms)
+Completed 500 Internal Server Error in 231ms (ActiveRecord: 1.1ms)
+
+
+  
+ActionView::Template::Error (couldn't find file 'jquery' with type 'application/javascript'
+Checked in these paths: 
+  /Users/richardlynch/dev/link_to_add_fields/test/dummy/app/assets/config
+  /Users/richardlynch/dev/link_to_add_fields/test/dummy/app/assets/images
+  /Users/richardlynch/dev/link_to_add_fields/test/dummy/app/assets/javascripts
+  /Users/richardlynch/dev/link_to_add_fields/test/dummy/app/assets/stylesheets
+  /Users/richardlynch/dev/link_to_add_fields/vendor/assets/javascripts
+  /Users/richardlynch/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/actioncable-5.1.3/lib/assets/compiled
+  /Users/richardlynch/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/actionview-5.1.3/lib/assets/compiled
+  /Users/richardlynch/dev/link_to_add_fields/test/dummy/node_modules):
+    4:     <title>Dummy</title>
+    5:     <%= csrf_meta_tags %>
+    6: 
+    7:     <%= stylesheet_link_tag    'application', media: 'all' %>
+    8:     <%= javascript_include_tag 'application' %>
+    9:   </head>
+   10: 
+  
+app/assets/javascripts/application.js:13
+app/views/layouts/application.html.erb:7:in `_app_views_layouts_application_html_erb___1023537502840100947_70098128585900'
+Started GET "/" for 127.0.0.1 at 2017-10-03 19:05:57 +0100
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (2.8ms)
+  Rendered posts/new.html.erb within layouts/application (54.3ms)
+Completed 500 Internal Server Error in 223ms (ActiveRecord: 2.0ms)
+
+
+  
+ActionView::Template::Error (couldn't find file 'jquery' with type 'application/javascript'
+Checked in these paths: 
+  /Users/richardlynch/dev/link_to_add_fields/test/dummy/app/assets/config
+  /Users/richardlynch/dev/link_to_add_fields/test/dummy/app/assets/images
+  /Users/richardlynch/dev/link_to_add_fields/test/dummy/app/assets/javascripts
+  /Users/richardlynch/dev/link_to_add_fields/test/dummy/app/assets/stylesheets
+  /Users/richardlynch/dev/link_to_add_fields/vendor/assets/javascripts
+  /Users/richardlynch/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/actioncable-5.1.3/lib/assets/compiled
+  /Users/richardlynch/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/actionview-5.1.3/lib/assets/compiled
+  /Users/richardlynch/dev/link_to_add_fields/test/dummy/node_modules):
+    4:     <title>Dummy</title>
+    5:     <%= csrf_meta_tags %>
+    6: 
+    7:     <%= stylesheet_link_tag    'application', media: 'all' %>
+    8:     <%= javascript_include_tag 'application' %>
+    9:   </head>
+   10: 
+  
+app/assets/javascripts/application.js:13
+app/views/layouts/application.html.erb:7:in `_app_views_layouts_application_html_erb___1949470143716869309_70246217291680'
+Started GET "/" for 127.0.0.1 at 2017-10-03 19:07:08 +0100
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (8.7ms)
+  Rendered posts/new.html.erb within layouts/application (53.4ms)
+Completed 500 Internal Server Error in 232ms (ActiveRecord: 1.1ms)
+
+
+  
+ActionView::Template::Error (couldn't find file 'jquery' with type 'application/javascript'
+Checked in these paths: 
+  /Users/richardlynch/dev/link_to_add_fields/test/dummy/app/assets/config
+  /Users/richardlynch/dev/link_to_add_fields/test/dummy/app/assets/images
+  /Users/richardlynch/dev/link_to_add_fields/test/dummy/app/assets/javascripts
+  /Users/richardlynch/dev/link_to_add_fields/test/dummy/app/assets/stylesheets
+  /Users/richardlynch/dev/link_to_add_fields/vendor/assets/javascripts
+  /Users/richardlynch/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/actioncable-5.1.3/lib/assets/compiled
+  /Users/richardlynch/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/actionview-5.1.3/lib/assets/compiled
+  /Users/richardlynch/dev/link_to_add_fields/test/dummy/node_modules):
+    4:     <title>Dummy</title>
+    5:     <%= csrf_meta_tags %>
+    6: 
+    7:     <%= stylesheet_link_tag    'application', media: 'all' %>
+    8:     <%= javascript_include_tag 'application' %>
+    9:   </head>
+   10: 
+  
+app/assets/javascripts/application.js:13
+app/views/layouts/application.html.erb:7:in `_app_views_layouts_application_html_erb___2372254499014339767_70285544763600'
+Started GET "/" for 127.0.0.1 at 2017-10-03 19:08:50 +0100
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (1.0ms)
+  Rendered posts/new.html.erb within layouts/application (6.3ms)
+Completed 500 Internal Server Error in 17ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionView::Template::Error (couldn't find file 'jquery' with type 'application/javascript'
+Checked in these paths: 
+  /Users/richardlynch/dev/link_to_add_fields/test/dummy/app/assets/config
+  /Users/richardlynch/dev/link_to_add_fields/test/dummy/app/assets/images
+  /Users/richardlynch/dev/link_to_add_fields/test/dummy/app/assets/javascripts
+  /Users/richardlynch/dev/link_to_add_fields/test/dummy/app/assets/stylesheets
+  /Users/richardlynch/dev/link_to_add_fields/vendor/assets/javascripts
+  /Users/richardlynch/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/actioncable-5.1.3/lib/assets/compiled
+  /Users/richardlynch/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/actionview-5.1.3/lib/assets/compiled
+  /Users/richardlynch/dev/link_to_add_fields/test/dummy/node_modules):
+    4:     <title>Dummy</title>
+    5:     <%= csrf_meta_tags %>
+    6: 
+    7:     <%= stylesheet_link_tag    'application', media: 'all' %>
+    8:     <%= javascript_include_tag 'application' %>
+    9:   </head>
+   10: 
+  
+app/assets/javascripts/application.js:13
+app/views/layouts/application.html.erb:7:in `_app_views_layouts_application_html_erb___2372254499014339767_70285588011220'
+Started GET "/" for 127.0.0.1 at 2017-10-03 19:09:16 +0100
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (1.2ms)
+  Rendered posts/new.html.erb within layouts/application (7.0ms)
+Completed 500 Internal Server Error in 21ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionView::Template::Error (couldn't find file 'jquery' with type 'application/javascript'
+Checked in these paths: 
+  /Users/richardlynch/dev/link_to_add_fields/test/dummy/app/assets/config
+  /Users/richardlynch/dev/link_to_add_fields/test/dummy/app/assets/images
+  /Users/richardlynch/dev/link_to_add_fields/test/dummy/app/assets/javascripts
+  /Users/richardlynch/dev/link_to_add_fields/test/dummy/app/assets/stylesheets
+  /Users/richardlynch/dev/link_to_add_fields/vendor/assets/javascripts
+  /Users/richardlynch/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/actioncable-5.1.3/lib/assets/compiled
+  /Users/richardlynch/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/actionview-5.1.3/lib/assets/compiled
+  /Users/richardlynch/dev/link_to_add_fields/test/dummy/node_modules):
+    4:     <title>Dummy</title>
+    5:     <%= csrf_meta_tags %>
+    6: 
+    7:     <%= stylesheet_link_tag    'application', media: 'all' %>
+    8:     <%= javascript_include_tag 'application' %>
+    9:   </head>
+   10: 
+  
+app/assets/javascripts/application.js:13
+app/views/layouts/application.html.erb:7:in `_app_views_layouts_application_html_erb___2372254499014339767_70285565393240'
+Started GET "/" for 127.0.0.1 at 2017-10-03 19:10:31 +0100
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (1.0ms)
+  Rendered posts/new.html.erb within layouts/application (6.2ms)
+Completed 500 Internal Server Error in 17ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionView::Template::Error (couldn't find file 'jquery' with type 'application/javascript'
+Checked in these paths: 
+  /Users/richardlynch/dev/link_to_add_fields/test/dummy/app/assets/config
+  /Users/richardlynch/dev/link_to_add_fields/test/dummy/app/assets/images
+  /Users/richardlynch/dev/link_to_add_fields/test/dummy/app/assets/javascripts
+  /Users/richardlynch/dev/link_to_add_fields/test/dummy/app/assets/stylesheets
+  /Users/richardlynch/dev/link_to_add_fields/vendor/assets/javascripts
+  /Users/richardlynch/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/actioncable-5.1.3/lib/assets/compiled
+  /Users/richardlynch/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/actionview-5.1.3/lib/assets/compiled
+  /Users/richardlynch/dev/link_to_add_fields/test/dummy/node_modules):
+    4:     <title>Dummy</title>
+    5:     <%= csrf_meta_tags %>
+    6: 
+    7:     <%= stylesheet_link_tag    'application', media: 'all' %>
+    8:     <%= javascript_include_tag 'application' %>
+    9:   </head>
+   10: 
+  
+app/assets/javascripts/application.js:13
+app/views/layouts/application.html.erb:7:in `_app_views_layouts_application_html_erb___2372254499014339767_70285535581080'
+Started GET "/" for 127.0.0.1 at 2017-10-03 19:10:45 +0100
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (2.5ms)
+  Rendered posts/new.html.erb within layouts/application (49.3ms)
+Completed 500 Internal Server Error in 228ms (ActiveRecord: 1.0ms)
+
+
+  
+ActionView::Template::Error (couldn't find file 'jquery' with type 'application/javascript'
+Checked in these paths: 
+  /Users/richardlynch/dev/link_to_add_fields/test/dummy/app/assets/config
+  /Users/richardlynch/dev/link_to_add_fields/test/dummy/app/assets/images
+  /Users/richardlynch/dev/link_to_add_fields/test/dummy/app/assets/javascripts
+  /Users/richardlynch/dev/link_to_add_fields/test/dummy/app/assets/stylesheets
+  /Users/richardlynch/dev/link_to_add_fields/vendor/assets/javascripts
+  /Users/richardlynch/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/actioncable-5.1.3/lib/assets/compiled
+  /Users/richardlynch/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/actionview-5.1.3/lib/assets/compiled
+  /Users/richardlynch/dev/link_to_add_fields/test/dummy/node_modules):
+    4:     <title>Dummy</title>
+    5:     <%= csrf_meta_tags %>
+    6: 
+    7:     <%= stylesheet_link_tag    'application', media: 'all' %>
+    8:     <%= javascript_include_tag 'application' %>
+    9:   </head>
+   10: 
+  
+app/assets/javascripts/application.js:13
+app/views/layouts/application.html.erb:7:in `_app_views_layouts_application_html_erb___152110093580676913_70225979626820'
+Started GET "/" for 127.0.0.1 at 2017-10-03 19:10:54 +0100
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (1.3ms)
+  Rendered posts/new.html.erb within layouts/application (8.1ms)
+Completed 200 OK in 32ms (Views: 30.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-03 19:11:00 +0100
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (1.2ms)
+  Rendered posts/new.html.erb within layouts/application (6.3ms)
+Completed 500 Internal Server Error in 16ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionView::Template::Error (couldn't find file 'jquery' with type 'application/javascript'
+Checked in these paths: 
+  /Users/richardlynch/dev/link_to_add_fields/test/dummy/app/assets/config
+  /Users/richardlynch/dev/link_to_add_fields/test/dummy/app/assets/images
+  /Users/richardlynch/dev/link_to_add_fields/test/dummy/app/assets/javascripts
+  /Users/richardlynch/dev/link_to_add_fields/test/dummy/app/assets/stylesheets
+  /Users/richardlynch/dev/link_to_add_fields/vendor/assets/javascripts
+  /Users/richardlynch/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/actioncable-5.1.3/lib/assets/compiled
+  /Users/richardlynch/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/actionview-5.1.3/lib/assets/compiled
+  /Users/richardlynch/dev/link_to_add_fields/test/dummy/node_modules):
+     5:     <%= csrf_meta_tags %>
+     6: 
+     7:     <%= stylesheet_link_tag    'application', media: 'all' %>
+     8:     <%= javascript_include_tag 'application' %>
+     9:   </head>
+    10: 
+    11:   <body>
+  
+app/assets/javascripts/application.js:13
+app/views/layouts/application.html.erb:8:in `_app_views_layouts_application_html_erb___152110093580676913_70226037265460'
+Started GET "/" for 127.0.0.1 at 2017-10-03 19:11:55 +0100
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (1.9ms)
+  Rendered posts/new.html.erb within layouts/application (34.3ms)
+Completed 500 Internal Server Error in 192ms (ActiveRecord: 1.1ms)
+
+
+  
+ActionView::Template::Error (couldn't find file 'jquery' with type 'application/javascript'
+Checked in these paths: 
+  /Users/richardlynch/dev/link_to_add_fields/test/dummy/app/assets/config
+  /Users/richardlynch/dev/link_to_add_fields/test/dummy/app/assets/images
+  /Users/richardlynch/dev/link_to_add_fields/test/dummy/app/assets/javascripts
+  /Users/richardlynch/dev/link_to_add_fields/test/dummy/app/assets/stylesheets
+  /Users/richardlynch/dev/link_to_add_fields/vendor/assets/javascripts
+  /Users/richardlynch/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/actioncable-5.1.3/lib/assets/compiled
+  /Users/richardlynch/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/actionview-5.1.3/lib/assets/compiled
+  /Users/richardlynch/dev/link_to_add_fields/test/dummy/node_modules):
+    4:     <title>Dummy</title>
+    5:     <%= csrf_meta_tags %>
+    6: 
+    7:     <%= stylesheet_link_tag    'application', media: 'all' %>
+    8:     <%= javascript_include_tag 'application' %>
+    9:   </head>
+   10: 
+  
+app/assets/javascripts/application.js:13
+app/views/layouts/application.html.erb:7:in `_app_views_layouts_application_html_erb__507502979329992082_70108284280240'
+Started GET "/" for 127.0.0.1 at 2017-10-03 19:12:02 +0100
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (4.1ms)
+  Rendered posts/new.html.erb within layouts/application (47.3ms)
+Completed 200 OK in 398ms (Views: 385.0ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-03 19:15:25 +0100
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (2.4ms)
+  Rendered posts/new.html.erb within layouts/application (46.8ms)
+Completed 200 OK in 336ms (Views: 320.9ms | ActiveRecord: 3.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-03 19:16:48 +0100
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (1.1ms)
+  Rendered posts/new.html.erb within layouts/application (6.3ms)
+Completed 200 OK in 67ms (Views: 65.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-03 19:17:00 +0100
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (1.2ms)
+  Rendered posts/new.html.erb within layouts/application (29.9ms)
+Completed 200 OK in 93ms (Views: 91.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-03 19:17:09 +0100
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (1.0ms)
+  Rendered posts/new.html.erb within layouts/application (5.7ms)
+Completed 200 OK in 65ms (Views: 63.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-03 19:17:21 +0100
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (0.9ms)
+  Rendered posts/new.html.erb within layouts/application (5.7ms)
+Completed 200 OK in 75ms (Views: 73.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-03 19:17:49 +0100
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (1.2ms)
+  Rendered posts/new.html.erb within layouts/application (6.7ms)
+Completed 200 OK in 74ms (Views: 72.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-03 19:18:25 +0100
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (1.3ms)
+  Rendered posts/new.html.erb within layouts/application (8.4ms)
+Completed 200 OK in 78ms (Views: 76.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-03 19:20:36 +0100
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (0.8ms)
+  Rendered posts/new.html.erb within layouts/application (5.5ms)
+Completed 200 OK in 62ms (Views: 61.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-03 19:21:24 +0100
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (0.9ms)
+  Rendered posts/new.html.erb within layouts/application (5.5ms)
+Completed 200 OK in 77ms (Views: 75.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-03 19:22:13 +0100
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (1.4ms)
+  Rendered posts/new.html.erb within layouts/application (6.6ms)
+Completed 200 OK in 64ms (Views: 62.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-03 19:22:59 +0100
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (1.2ms)
+  Rendered posts/new.html.erb within layouts/application (6.5ms)
+Completed 200 OK in 65ms (Views: 63.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-03 19:23:51 +0100
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (1.1ms)
+  Rendered posts/new.html.erb within layouts/application (6.4ms)
+Completed 200 OK in 23ms (Views: 21.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-03 19:24:02 +0100
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (1.0ms)
+  Rendered posts/new.html.erb within layouts/application (5.8ms)
+Completed 200 OK in 75ms (Views: 72.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-03 19:31:40 +0100
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (2.1ms)
+  Rendered posts/new.html.erb within layouts/application (19.6ms)
+Completed 200 OK in 52ms (Views: 38.1ms | ActiveRecord: 2.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-03 19:31:48 +0100
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (1.3ms)
+  Rendered posts/new.html.erb within layouts/application (8.6ms)
+Completed 200 OK in 71ms (Views: 70.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-03 19:33:00 +0100
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (1.1ms)
+  Rendered posts/new.html.erb within layouts/application (11.8ms)
+Completed 200 OK in 26ms (Views: 24.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-03 19:33:07 +0100
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (1.0ms)
+  Rendered posts/new.html.erb within layouts/application (5.3ms)
+Completed 200 OK in 22ms (Views: 20.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-03 19:33:22 +0100
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (1.5ms)
+  Rendered posts/new.html.erb within layouts/application (6.0ms)
+Completed 200 OK in 18ms (Views: 16.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-03 19:33:43 +0100
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (1.1ms)
+  Rendered posts/new.html.erb within layouts/application (5.9ms)
+Completed 200 OK in 23ms (Views: 21.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-03 19:33:51 +0100
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (0.8ms)
+  Rendered posts/new.html.erb within layouts/application (5.2ms)
+Completed 200 OK in 20ms (Views: 18.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-03 19:34:15 +0100
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (0.7ms)
+  Rendered posts/new.html.erb within layouts/application (5.9ms)
+Completed 200 OK in 20ms (Views: 18.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-03 19:34:29 +0100
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (0.9ms)
+  Rendered posts/new.html.erb within layouts/application (5.9ms)
+Completed 200 OK in 18ms (Views: 17.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-03 19:34:45 +0100
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (0.9ms)
+  Rendered posts/new.html.erb within layouts/application (5.7ms)
+Completed 200 OK in 21ms (Views: 19.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-03 19:34:53 +0100
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (0.7ms)
+  Rendered posts/new.html.erb within layouts/application (4.7ms)
+Completed 200 OK in 18ms (Views: 16.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-03 19:35:05 +0100
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (0.7ms)
+  Rendered posts/new.html.erb within layouts/application (5.0ms)
+Completed 200 OK in 19ms (Views: 18.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-03 19:35:15 +0100
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (0.8ms)
+  Rendered posts/new.html.erb within layouts/application (5.9ms)
+Completed 200 OK in 19ms (Views: 17.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-03 19:35:41 +0100
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (0.8ms)
+  Rendered posts/new.html.erb within layouts/application (5.5ms)
+Completed 200 OK in 19ms (Views: 18.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-03 19:36:02 +0100
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (0.7ms)
+  Rendered posts/new.html.erb within layouts/application (4.9ms)
+Completed 200 OK in 22ms (Views: 20.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-03 19:54:09 +0100
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (1.6ms)
+  Rendered posts/new.html.erb within layouts/application (6.7ms)
+Completed 200 OK in 26ms (Views: 24.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-03 19:54:14 +0100
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (0.8ms)
+  Rendered posts/new.html.erb within layouts/application (7.2ms)
+Completed 200 OK in 25ms (Views: 24.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-03 19:54:27 +0100
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (0.8ms)
+  Rendered posts/new.html.erb within layouts/application (5.6ms)
+Completed 200 OK in 21ms (Views: 19.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-03 19:55:16 +0100
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (0.7ms)
+  Rendered posts/new.html.erb within layouts/application (5.5ms)
+Completed 200 OK in 68ms (Views: 65.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-03 20:00:23 +0100
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (1.1ms)
+  Rendered posts/new.html.erb within layouts/application (13.7ms)
+Completed 200 OK in 86ms (Views: 72.6ms | ActiveRecord: 1.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-03 20:04:35 +0100
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (1.1ms)
+  Rendered posts/new.html.erb within layouts/application (13.1ms)
+Completed 200 OK in 36ms (Views: 24.6ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-03 20:06:35 +0100
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (0.7ms)
+  Rendered posts/new.html.erb within layouts/application (5.2ms)
+Completed 200 OK in 22ms (Views: 19.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-03 20:06:54 +0100
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (0.8ms)
+  Rendered posts/new.html.erb within layouts/application (5.5ms)
+Completed 200 OK in 20ms (Views: 18.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-03 20:07:19 +0100
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (0.8ms)
+  Rendered posts/new.html.erb within layouts/application (5.0ms)
+Completed 200 OK in 17ms (Views: 15.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-03 20:15:05 +0100
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (4.2ms)
+  Rendered posts/new.html.erb within layouts/application (57.0ms)
+Completed 200 OK in 311ms (Views: 291.3ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-03 20:35:21 +0100
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (1.2ms)
+  Rendered posts/new.html.erb within layouts/application (13.5ms)
+Completed 200 OK in 82ms (Views: 71.2ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-03 20:35:34 +0100
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (1.0ms)
+  Rendered posts/new.html.erb within layouts/application (6.2ms)
+Completed 200 OK in 37ms (Views: 34.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-03 20:36:39 +0100
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (1.1ms)
+  Rendered posts/new.html.erb within layouts/application (6.7ms)
+Completed 200 OK in 27ms (Views: 24.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-03 20:36:58 +0100
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (1.1ms)
+  Rendered posts/new.html.erb within layouts/application (7.2ms)
+Completed 200 OK in 29ms (Views: 27.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-03 20:40:08 +0100
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (1.4ms)
+  Rendered posts/new.html.erb within layouts/application (33.4ms)
+Completed 200 OK in 251ms (Views: 240.9ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-03 20:40:33 +0100
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (0.9ms)
+  Rendered posts/new.html.erb within layouts/application (6.2ms)
+Completed 500 Internal Server Error in 23ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionView::Template::Error (couldn't find file 'link_to_add_fields' with type 'application/javascript'
+Checked in these paths: 
+  /Users/richardlynch/dev/link_to_add_fields/test/dummy/app/assets/config
+  /Users/richardlynch/dev/link_to_add_fields/test/dummy/app/assets/images
+  /Users/richardlynch/dev/link_to_add_fields/test/dummy/app/assets/javascripts
+  /Users/richardlynch/dev/link_to_add_fields/test/dummy/app/assets/stylesheets
+  /Users/richardlynch/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/jquery-rails-4.3.1/vendor/assets/javascripts
+  /Users/richardlynch/dev/link_to_add_fields/vendor/assets/javascripts
+  /Users/richardlynch/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/actioncable-5.1.3/lib/assets/compiled
+  /Users/richardlynch/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/actionview-5.1.3/lib/assets/compiled
+  /Users/richardlynch/dev/link_to_add_fields/test/dummy/node_modules):
+     5:     <%= csrf_meta_tags %>
+     6: 
+     7:     <%= stylesheet_link_tag    'application', media: 'all' %>
+     8:     <%= javascript_include_tag 'application' %>
+     9:   </head>
+    10: 
+    11:   <body>
+  
+app/assets/javascripts/application.js:14
+app/views/layouts/application.html.erb:8:in `_app_views_layouts_application_html_erb___1697682898350662399_70225891590520'
+Started GET "/" for 127.0.0.1 at 2017-10-03 20:47:20 +0100
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (1.7ms)
+  Rendered posts/new.html.erb within layouts/application (8.1ms)
+Completed 500 Internal Server Error in 23ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionView::Template::Error (couldn't find file 'link_to_add_fields' with type 'application/javascript'
+Checked in these paths: 
+  /Users/richardlynch/dev/link_to_add_fields/test/dummy/app/assets/config
+  /Users/richardlynch/dev/link_to_add_fields/test/dummy/app/assets/images
+  /Users/richardlynch/dev/link_to_add_fields/test/dummy/app/assets/javascripts
+  /Users/richardlynch/dev/link_to_add_fields/test/dummy/app/assets/stylesheets
+  /Users/richardlynch/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/jquery-rails-4.3.1/vendor/assets/javascripts
+  /Users/richardlynch/dev/link_to_add_fields/vendor/assets/javascripts
+  /Users/richardlynch/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/actioncable-5.1.3/lib/assets/compiled
+  /Users/richardlynch/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/actionview-5.1.3/lib/assets/compiled
+  /Users/richardlynch/dev/link_to_add_fields/test/dummy/node_modules):
+     5:     <%= csrf_meta_tags %>
+     6: 
+     7:     <%= stylesheet_link_tag    'application', media: 'all' %>
+     8:     <%= javascript_include_tag 'application' %>
+     9:   </head>
+    10: 
+    11:   <body>
+  
+app/assets/javascripts/application.js:14
+app/views/layouts/application.html.erb:8:in `_app_views_layouts_application_html_erb___1697682898350662399_70225843874560'
+Started GET "/" for 127.0.0.1 at 2017-10-03 20:50:04 +0100
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (0.7ms)
+  Rendered posts/new.html.erb within layouts/application (5.0ms)
+Completed 200 OK in 63ms (Views: 61.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-03 20:52:16 +0100
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (0.7ms)
+  Rendered posts/new.html.erb within layouts/application (5.6ms)
+Completed 200 OK in 67ms (Views: 65.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-03 20:52:47 +0100
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (1.4ms)
+  Rendered posts/new.html.erb within layouts/application (6.4ms)
+Completed 200 OK in 64ms (Views: 62.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-03 20:54:30 +0100
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (1.1ms)
+  Rendered posts/new.html.erb within layouts/application (12.8ms)
+Completed 200 OK in 35ms (Views: 25.0ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-03 20:54:37 +0100
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (0.9ms)
+  Rendered posts/new.html.erb within layouts/application (6.4ms)
+Completed 200 OK in 63ms (Views: 61.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-03 20:56:59 +0100
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (0.7ms)
+  Rendered posts/new.html.erb within layouts/application (5.1ms)
+Completed 200 OK in 28ms (Views: 25.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-03 20:57:10 +0100
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (1.0ms)
+  Rendered posts/new.html.erb within layouts/application (5.9ms)
+Completed 200 OK in 68ms (Views: 66.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-03 20:57:20 +0100
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (0.8ms)
+  Rendered posts/new.html.erb within layouts/application (6.0ms)
+Completed 200 OK in 20ms (Views: 18.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-03 20:58:39 +0100
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (1.1ms)
+  Rendered posts/new.html.erb within layouts/application (5.8ms)
+Completed 200 OK in 20ms (Views: 18.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-03 20:59:10 +0100
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (0.7ms)
+  Rendered posts/new.html.erb within layouts/application (4.9ms)
+Completed 200 OK in 63ms (Views: 61.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-03 20:59:43 +0100
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (0.7ms)
+  Rendered posts/new.html.erb within layouts/application (4.8ms)
+Completed 200 OK in 65ms (Views: 63.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-03 21:00:09 +0100
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (0.7ms)
+  Rendered posts/new.html.erb within layouts/application (4.8ms)
+Completed 200 OK in 20ms (Views: 18.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-03 21:00:55 +0100
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (0.7ms)
+  Rendered posts/new.html.erb within layouts/application (5.7ms)
+Completed 200 OK in 19ms (Views: 17.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-10-03 21:01:24 +0100
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_comment_fields.html.erb (0.8ms)
+  Rendered posts/new.html.erb within layouts/application (5.4ms)
+Completed 200 OK in 20ms (Views: 18.1ms | ActiveRecord: 0.0ms)
+
+

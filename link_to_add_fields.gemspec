@@ -15,6 +15,7 @@ Gem::Specification.new do |s|
   s.license     = "MIT"
 
   s.files = Dir["{app,config,db,lib,vendor}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
+  s.test_files = Dir["spec/**/*"]
 
   s.required_ruby_version = ">= 2.0"
 
@@ -22,4 +23,8 @@ Gem::Specification.new do |s|
   s.add_dependency 'jquery-rails'
 
   s.add_development_dependency "sqlite3"
+  s.add_development_dependency 'rspec-rails'
+  s.add_development_dependency 'capybara'
+  s.add_development_dependency 'poltergeist'
+  # TODO find out what goes in gemfile
 end
