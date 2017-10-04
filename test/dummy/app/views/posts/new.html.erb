@@ -1,0 +1,16 @@
+<%= form_for @post do |f| %>
+  <%= f.label :name %>
+  <br>
+  <%= f.text_field :name %>
+  <br>
+  <%= f.label :body %>
+  <br>
+  <%= f.text_area :body %>
+  <%= f.fields_for :comments do |ff| %>
+    <%= render partial: "comment_fields", locals: { f: ff } %>
+  <% end %>
+  <br>
+  <%= link_to_add_fields 'Add comment', f, :comments, class: 'btn', data: { test: true } %>
+  <br>
+  <%= f.submit %>
+<% end %>
