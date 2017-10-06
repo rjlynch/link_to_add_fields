@@ -1,16 +1,23 @@
 require 'spec_helper'
 
 describe 'LinkToAddFields', type: :feature, js: true do
+  let(:hidden_destroy_field) do
+    page.all('input[type="hidden"]', visible: false)[1]
+  end
+
+  let(:second_remove_comment_link) do
+    all('a', text: 'Remove comment')[1]
+  end
+
+  let(:comment_field) do
+    find_field('Comment')
+  end
+
   before :each do
     visit 'posts/new'
   end
 
   context 'Adding fields' do
-    # test setup test
-    it "doesn't already have comment fields" do
-      expect(page).not_to have_content 'Comment'
-    end
-
     it 'adds a fields' do
       click_link 'Add comment'
       expect(page).to have_content 'Comment'
@@ -26,8 +33,6 @@ describe 'LinkToAddFields', type: :feature, js: true do
     end
 
     it 'removes the field wrapper' do
-      fill_in 'Comment', with: 'test'
-      expect(page).to have_content 'test'
       click_link 'Remove comment'
       expect(page).not_to have_content 'Comment'
       expect(page).not_to have_content 'test'
@@ -35,14 +40,15 @@ describe 'LinkToAddFields', type: :feature, js: true do
 
     it 'only removes the closest target field' do
       click_link 'Add comment'
-      expect(page).to have_content 'Comment', count: 2
-      expect(page).to have_content 'Remove comment', count: 2
-      all('a', text: 'Remove comment')[1].click
+      second_remove_comment_link.click
       expect(page).to have_content 'Comment', count: 1
       expect(page).to have_content 'Remove comment', count: 1
-      expect(page).to have_content 'test'
+      expect(comment_field.value).to eq 'test'
     end
 
-    it 'checks the destroy check box'
+    it 'sets destroy field' do
+      click_link 'Remove comment'
+      expect(hidden_destroy_field.value).to eq '1'
+    end
   end
 end

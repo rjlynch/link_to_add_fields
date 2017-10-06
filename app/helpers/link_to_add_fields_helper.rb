@@ -4,7 +4,9 @@ module LinkToAddFieldsHelper
     new_object = f.object.send(association).klass.new
     id = new_object.object_id
     objects_name = f.object.class.name.underscore.pluralize
-    partial_name = association.to_s.singularize + "_fields"
+    options_partial = options.delete(:partial)
+    infered_partial = association.to_s.singularize + "_fields"
+    partial_name = options_partial || infered_partial
     template_name = "#{objects_name}/#{partial_name}"
     fields = f.fields_for(association, new_object, child_index: id) do |builder|
       render(template_name, f: builder)
