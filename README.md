@@ -18,9 +18,18 @@ Add this line to your application's Gemfile:
 gem 'link_to_add_fields'
 ```
 
-And then execute:
+Then execute:
 ```bash
 $ bundle
+```
+
+And require `link_to_add_fields` in application.js, after jQuery.
+```javascript
+//
+//= require jquery
+//= require link_to_add_fields
+//= require_tree .
+
 ```
 
 ## Usage
