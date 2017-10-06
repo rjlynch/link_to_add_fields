@@ -1,4 +1,3 @@
-# add event listeners and ability to specify partial path
 module LinkToAddFieldsHelper
   def link_to_add_fields(name, f, association, options = {})
     new_object = f.object.send(association).klass.new
