@@ -1,4 +1,5 @@
 # LinkToAddFields
+[!](https://imgur.com/a/7Kmry)
 Dynamically add nested fields to your Rails forms.  
 Works great with `accepts_nested_attributes_for`.  
 When clicked, `link_to_add_fields` will render the association's fields partial 
@@ -45,7 +46,7 @@ blank will be inferred form the form's model's name and the association
 (signularised), eg `posts/comment_fields`
  - other options are passed through to `link_to`.
 
-### `link_to_remove_fields(name, target, options) => String`
+### `link_to_remove_fields(name, target, options = {}) => String`
 #### Parameters:
   - name (String) -- Name of the link, passed to `link_to`.
   - target (String) -- Css selector to hide.
