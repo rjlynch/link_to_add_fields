@@ -1,5 +1,5 @@
 # LinkToAddFields
-[!](https://imgur.com/a/7Kmry)
+![](https://imgur.com/a/7Kmry)
 Dynamically add nested fields to your Rails forms.  
 Works great with `accepts_nested_attributes_for`.  
 When clicked, `link_to_add_fields` will render the association's fields partial 
