@@ -1,5 +1,3 @@
-# re enable event triggering but wrap in a catch block and throw a clearer
-# error message
 $(document).on 'click', '[data-link-to-remove-field]', (e) ->
   e.preventDefault()
   $(this).prev('input[type=hidden]').val('1')
