@@ -1,5 +1,4 @@
 # LinkToAddFields
-![](https://i.imgur.com/OGnj3Af.gif) 
  
 Dynamically add nested fields to your Rails forms.  
 When clicked, `link_to_add_fields` will render the association's fields partial 
@@ -84,6 +83,8 @@ blank will be inferred form the form's model's name and the association
     <%= link_to_remove_fields 'Remove comment', '.comment_fields' %>
   </div>
 ```
+
+![](https://i.imgur.com/OGnj3Af.gif)
 
 ## License
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
