@@ -73,7 +73,7 @@ blank will be inferred form the form's model's name and the association
     <%= f.submit %>
   <% end %>
 ```
-`comment_fields.html.erb`
+`_comment_fields.html.erb`
 ```erb
   <div class="comment_fields">
     <%= f.label :body, 'Comment' %>
